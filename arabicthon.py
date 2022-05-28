@@ -1,6 +1,6 @@
-# wv_dict={} #a temporary fix to hard code where the word embedding model is, will fix this later
-# wv_fpath="wv/arabic_quran_news_wv_model_300.wv" 
-# wv_dict[wv_fpath]=arabic_quran_news_model
+wv_dict={} #a temporary fix to hard code where the word embedding model is, will fix this later
+wv_fpath="wv/arabic_quran_news_wv_model_300.wv" 
+wv_dict[wv_fpath]=arabic_quran_news_model
 
 ar_chars=[chr(i) for i in range(1560,1630)]
 ar_chars+=" "
@@ -13,6 +13,31 @@ def one_hot_encoder(item,item_list):
     zeros[item_index]=1.
   return zeros
 
+def extract_word_features(word0,params0={},additional_data=[]):
+  n_chars=params0.get("n_chars",3)
+  wv_model_fpath=params0.get("wv_model_path")
+  wv_model=wv_dict[wv_model_fpath]
+  feature_list=[]
+  flat_feature_list=[]
+  for i in range(n_chars):
+    cur_char=" "
+    if i<len(word0): cur_char=word0[i]
+    cur_one_hot=one_hot_encoder(cur_char,ar_chars)
+    flat_feature_list.extend(cur_one_hot)
+  for i in range(n_chars):
+    word1 =word0[-n_chars:] 
+    cur_char=" "
+    if i<len(word1): cur_char=word1[i]
+    cur_one_hot=one_hot_encoder(cur_char,ar_chars)
+    flat_feature_list.extend(cur_one_hot)
+  if wv_model!=None:
+    try:
+      cur_vec=wv_model[word0]
+    except:
+      cur_vec=[0.]*wv_model.vector_size
+    flat_feature_list.extend(cur_vec)
+  flat_feature_list.extend(additional_data)
+  return flat_feature_list
 
 
 from collections import OrderedDict
