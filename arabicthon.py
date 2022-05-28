@@ -1,6 +1,6 @@
-wv_dict={} #a temporary fix to hard code where the word embedding model is, will fix this later
-wv_fpath="wv/arabic_quran_news_wv_model_300.wv" 
-wv_dict[wv_fpath]=arabic_quran_news_model
+# wv_dict={} #a temporary fix to hard code where the word embedding model is, will fix this later
+# wv_fpath="wv/arabic_quran_news_wv_model_300.wv" 
+# wv_dict[wv_fpath]=arabic_quran_news_model
 
 ar_chars=[chr(i) for i in range(1560,1630)]
 ar_chars+=" "
