@@ -1,4 +1,4 @@
-
+wv_dict={}
 
 ar_chars=[chr(i) for i in range(1560,1630)]
 ar_chars+=" "
