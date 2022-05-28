@@ -16,7 +16,8 @@ def one_hot_encoder(item,item_list):
 def extract_word_features(word0,params0={},additional_data=[]):
   n_chars=params0.get("n_chars",3)
   wv_model_fpath=params0.get("wv_model_path")
-  wv_model=wv_dict[wv_model_fpath]
+  #wv_model=wv_dict[wv_model_fpath]
+  wv_model=params0.get("wv")
   feature_list=[]
   flat_feature_list=[]
   for i in range(n_chars):
